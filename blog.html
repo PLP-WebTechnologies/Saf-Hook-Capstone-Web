@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Modern Blog</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Blog Page Specific Styles */
+        .blog-header {
+            padding: var(--spacing-lg);
+            margin-top: 60px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .search-section {
+            padding: var(--spacing-md) var(--spacing-lg);
+            background-color: var(--card-bg);
+            position: sticky;
+            top: 60px;
+            z-index: 100;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: var(--spacing-sm);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: none;
+            border-radius: var(--border-radius);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .blog-grid {
+            padding: var(--spacing-lg);
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .blog-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .blog-image {
+            position: relative;
+            padding-top: 60%;
+        }
+
+        .blog-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: var(--spacing-md);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        .blog-category {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .blog-excerpt {
+            margin-bottom: var(--spacing-md);
+            flex: 1;
+        }
+
+        .blog-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .read-time {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+                padding: var(--spacing-md);
+            }
+
+            .filter-buttons {
+                gap: var(--spacing-xs);
+            }
+
+            .filter-button {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">ModernBlog</div>
+        <button class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Blog Header -->
+    <header class="blog-header">
+        <h1>Latest Articles</h1>
+        <p>Explore our collection of web development articles and tutorials</p>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search articles..." id="search-input">
+        </div>
+        <div class="filter-buttons">
+            <button class="filter-button active" data-category="all">All</button>
+            <button class="filter-button" data-category="html">HTML</button>
+            <button class="filter-button" data-category="css">CSS</button>
+            <button class="filter-button" data-category="javascript">JavaScript</button>
+            <button class="filter-button" data-category="react">React</button>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <main class="blog-grid" id="blog-grid">
+        <!-- Blog posts will be dynamically added here -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ModernBlog</h3>
+                <p>Sharing knowledge and inspiration through meaningful content.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ModernBlog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Blog Posts Data
+        const blogPosts = [
+            {
+                title: 'Getting Started with HTML5',
+                excerpt: 'Learn the fundamentals of HTML5 and start building modern web pages...',
+                date: 'March 15, 2024',
+                category: 'html',
+                readTime: '5 min read',
+                image: 'https://images.unsplash.com/photo-1621839673705-6617adf9e890?w=800&auto=format&fit=crop&q=80'
+            },
+            {
+                title: 'CSS Grid Layout Made Simple',
+                excerpt: 'Master CSS Grid Layout with this comprehensive guide to building responsive layouts...',
+                date: 'March 14, 2024',
+                category: 'css',
+                readTime: '7 min read',
+                image: 'https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?w=800&auto=format&fit=crop&q=80'
+            },
+            {
+                title: 'JavaScript ES6+ Features',
+                excerpt: 'Explore the powerful features introduced in modern JavaScript...',
+                date: 'March 13, 2024',
+                category: 'javascript',
+                readTime: '8 min read',
+                image: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&auto=format&fit=crop&q=80'
+            },
+            {
+                title: 'React Hooks in Depth',
+                excerpt: 'Deep dive into React Hooks and learn how to write better functional components...',
+                date: 'March 12, 2024',
+                category: 'react',
+                readTime: '10 min read',
+                image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=80'
+            }
+        ];
+
+        // Create Blog Card
+        const createBlogCard = (post) => {
+            return `
+                <article class="blog-card" data-category="${post.category}">
+                    <div class="blog-image">
+                        <img src="${post.image}" alt="${post.title}">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">${post.date}</span>
+                            <span class="blog-category">${post.category.toUpperCase()}</span>
+                        </div>
+                        <h2>${post.title}</h2>
+                        <p class="blog-excerpt">${post.excerpt}</p>
+                        <div class="blog-footer">
+                            <span class="read-time">${post.readTime}</span>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+            `;
+        };
+
+        // Initialize Blog Grid
+        const blogGrid = document.getElementById('blog-grid');
+        const renderBlogPosts = (posts) => {
+            blogGrid.innerHTML = posts.map(post => createBlogCard(post)).join('');
+        };
+
+        // Search and Filter Functionality
+        const searchInput = document.getElementById('search-input');
+        const filterButtons = document.querySelectorAll('.filter-button');
+        let currentCategory = 'all';
+
+        const filterPosts = () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredPosts = blogPosts.filter(post => {
+                const matchesSearch = post.title.toLowerCase().includes(searchTerm) || 
+                                    post.excerpt.toLowerCase().includes(searchTerm);
+                const matchesCategory = currentCategory === 'all' || post.category === currentCategory;
+                return matchesSearch && matchesCategory;
+            });
+            renderBlogPosts(filteredPosts);
+        };
+
+        searchInput.addEventListener('input', filterPosts);
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentCategory = button.dataset.category;
+                filterPosts();
+            });
+        });
+
+        // Initial render
+        renderBlogPosts(blogPosts);
+    </script>
+</body>
+</html> 

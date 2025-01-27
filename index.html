@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/advanced.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="light-mode">
+    <!-- Particle Background -->
+    <canvas id="particle-bg"></canvas>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle glow">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="nav-brand text-gradient">ModernBlog</div>
+        <button class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero parallax-container">
+        <div class="parallax-layer parallax-back">
+            <div class="hero-background"></div>
+        </div>
+        <div class="parallax-layer parallax-base">
+            <div class="hero-content scroll-reveal">
+                <h1 class="text-gradient text-shadow-pop">Welcome to ModernBlog</h1>
+                <p class="floating">Explore thoughts, stories, and ideas that inspire.</p>
+                <a href="blog.html" class="cta-button button-3d ripple">Start Reading</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Posts -->
+    <section class="featured-posts">
+        <h2 class="text-gradient scroll-reveal">Featured Posts</h2>
+        <div class="post-carousel masonry-grid">
+            <!-- Post cards will be dynamically added here -->
+        </div>
+        <div class="carousel-controls">
+            <button class="prev-btn button-3d"><i class="fas fa-chevron-left"></i></button>
+            <button class="next-btn button-3d"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section glass scroll-reveal">
+        <div class="newsletter-content">
+            <h2 class="text-gradient">Subscribe to Our Newsletter</h2>
+            <p>Stay updated with our latest articles and news.</p>
+            <form class="newsletter-form" onsubmit="return handleNewsletterSubmit(event)">
+                <input type="email" placeholder="Enter your email" required class="form-control">
+                <button type="submit" class="button-3d ripple">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer glass">
+        <div class="footer-content">
+            <div class="footer-section scroll-reveal">
+                <h3 class="text-gradient">ModernBlog</h3>
+                <p>Sharing knowledge and inspiration through meaningful content.</p>
+            </div>
+            <div class="footer-section scroll-reveal">
+                <h3 class="text-gradient">Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section scroll-reveal">
+                <h3 class="text-gradient">Connect</h3>
+                <div class="social-links">
+                    <a href="#" class="hover-lift"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover-lift"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="hover-lift"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ModernBlog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top button-3d">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/advanced.js"></script>
+    <script>
+        // Newsletter Form Handler
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            // Simulate API call
+            setTimeout(() => {
+                alert(`Thank you for subscribing with ${email}!`);
+                event.target.reset();
+            }, 1000);
+            
+            return false;
+        }
+
+        // Initialize Post Cards with 3D effect
+        function initializePostCards() {
+            const posts = [
+                {
+                    image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=800&auto=format&fit=crop&q=80',
+                    date: 'March 15, 2024',
+                    title: 'Getting Started with Web Development',
+                    excerpt: 'Learn the fundamentals of modern web development and start your journey...'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=800&auto=format&fit=crop&q=80',
+                    date: 'March 14, 2024',
+                    title: 'Mastering CSS Grid Layout',
+                    excerpt: 'Deep dive into CSS Grid and learn how to create complex layouts with ease...'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=800&auto=format&fit=crop&q=80',
+                    date: 'March 13, 2024',
+                    title: 'JavaScript Best Practices',
+                    excerpt: 'Discover the best practices for writing clean and maintainable JavaScript code...'
+                }
+            ];
+
+            const carousel = document.querySelector('.post-carousel');
+            posts.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'post-card card-3d scroll-reveal';
+                card.innerHTML = `
+                    <div class="card-3d-inner">
+                        <div class="card-3d-front">
+                            <div class="post-image">
+                                <img src="${post.image}" alt="${post.title}" loading="lazy">
+                            </div>
+                            <div class="post-content">
+                                <span class="post-date">${post.date}</span>
+                                <h3>${post.title}</h3>
+                                <p>${post.excerpt}</p>
+                                <a href="#" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                        <div class="card-3d-back">
+                            <div class="post-content">
+                                <h3>Quick Preview</h3>
+                                <p>${post.excerpt}</p>
+                                <a href="#" class="cta-button button-3d">Read Full Article</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                carousel.appendChild(card);
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initializePostCards();
+        });
+    </script>
+</body>
+</html> 

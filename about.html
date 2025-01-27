@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Modern Blog</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* About Page Specific Styles */
+        .profile-section {
+            padding: var(--spacing-lg);
+            margin-top: 80px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--spacing-lg);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .profile-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .skills-section {
+            padding: var(--spacing-lg);
+            background-color: var(--card-bg);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .skill-card {
+            background-color: var(--bg-color);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .skill-level {
+            width: 100%;
+            height: 4px;
+            background-color: var(--border-color);
+            border-radius: 2px;
+            margin-top: var(--spacing-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 1s ease-in-out;
+        }
+
+        .timeline-section {
+            padding: var(--spacing-lg);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            padding: var(--spacing-md) 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: var(--border-color);
+        }
+
+        .timeline-item {
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            width: 50%;
+            padding: 0 var(--spacing-md);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            background-color: var(--card-bg);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -60px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: var(--spacing-lg);
+            }
+
+            .timeline-content::before {
+                left: -40px !important;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">ModernBlog</div>
+        <button class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="profile-image">
+            <img src="https://images.unsplash.com/photo-1537511446984-935f663eb1f4?w=800&auto=format&fit=crop&q=80" alt="Profile Picture">
+        </div>
+        <div class="profile-content">
+            <h1>About Me</h1>
+            <p>Hi! I'm a passionate web developer and tech enthusiast who loves to share knowledge through writing. With years of experience in the industry, I've worked on various projects and learned countless lessons along the way.</p>
+            <p>My goal is to make web development more accessible and enjoyable for everyone, from beginners to seasoned professionals.</p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <h2>Skills & Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fab fa-html5 skill-icon"></i>
+                <h3>HTML5</h3>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 95%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-css3-alt skill-icon"></i>
+                <h3>CSS3</h3>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 90%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-js skill-icon"></i>
+                <h3>JavaScript</h3>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-react skill-icon"></i>
+                <h3>React</h3>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 80%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <h2>My Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2024</h3>
+                    <p>Launched ModernBlog to share web development knowledge</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2023</h3>
+                    <p>Led development team for major client projects</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2022</h3>
+                    <p>Started freelancing and consulting</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2021</h3>
+                    <p>Graduated with Computer Science degree</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ModernBlog</h3>
+                <p>Sharing knowledge and inspiration through meaningful content.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ModernBlog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html> 

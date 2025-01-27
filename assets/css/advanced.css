@@ -1,0 +1,396 @@
+/* Advanced 3D and Animation Styles */
+:root {
+    --card-tilt-amount: 15deg;
+    --card-scale-amount: 1.05;
+    --perspective: 1500px;
+    --rotation-amount: 25deg;
+    --bounce-height: 0.75rem;
+}
+
+/* 3D Card Effects */
+.card-3d {
+    perspective: var(--perspective);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    height: 100%;
+}
+
+.card-3d-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.card-3d:hover .card-3d-inner {
+    transform: rotateY(180deg);
+}
+
+.card-3d-front,
+.card-3d-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.card-3d-front {
+    background: var(--card-bg);
+    transform: rotateY(0deg);
+}
+
+.card-3d-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+}
+
+.card-3d-back .post-content {
+    text-align: center;
+}
+
+.card-3d-back h3 {
+    color: white;
+    margin-bottom: var(--spacing-md);
+}
+
+.card-3d-back .cta-button {
+    margin-top: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid white;
+    color: white;
+}
+
+/* Parallax Effect */
+.parallax-container {
+    perspective: 8px;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.parallax-base {
+    transform: translateZ(0);
+    z-index: 2;
+}
+
+.parallax-back {
+    transform: translateZ(-6px) scale(1.75);
+    z-index: 1;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    opacity: 0.8;
+}
+
+/* Advanced Button Effects */
+.button-3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible !important;
+}
+
+.button-3d::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: inherit;
+    transform: translateZ(-8px);
+    filter: brightness(0.8);
+    border-radius: inherit;
+}
+
+.button-3d:hover {
+    transform: translateY(-4px) translateZ(0);
+}
+
+.button-3d:active {
+    transform: translateY(-2px) translateZ(0);
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0);
+    }
+    25% {
+        transform: translateY(var(--bounce-height)) rotate(2deg);
+    }
+    75% {
+        transform: translateY(calc(var(--bounce-height) * -0.5)) rotate(-1deg);
+    }
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Glowing Effect */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(var(--primary-rgb), 0.5),
+                   0 0 15px rgba(var(--primary-rgb), 0.3),
+                   0 0 25px rgba(var(--primary-rgb), 0.2);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.8),
+                   0 0 25px rgba(var(--primary-rgb), 0.5),
+                   0 0 35px rgba(var(--primary-rgb), 0.3);
+    }
+}
+
+.glow {
+    animation: glow 3s ease-in-out infinite;
+}
+
+/* Tilt Effect */
+.tilt {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    transition: transform 0.1s ease-out;
+}
+
+/* Glass Morphism */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+[data-theme="dark"] .glass {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Text Effects */
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    display: inline-block;
+}
+
+.text-gradient::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: inherit;
+    filter: blur(12px) opacity(0.4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.text-shadow-pop {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+                 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Advanced Grid Layout */
+.masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: 0;
+    grid-gap: var(--spacing-md);
+    padding: var(--spacing-md);
+}
+
+/* Scroll Animations */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+    border-radius: var(--border-radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: var(--border-radius-full);
+    border: 2px solid var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+}
+
+/* Advanced Hover Effects */
+.hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.hover-scale {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Loading Animations */
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+        border-width: 2px;
+    }
+    50% {
+        transform: rotate(180deg);
+        border-width: 3px;
+    }
+    100% {
+        transform: rotate(360deg);
+        border-width: 2px;
+    }
+}
+
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    left: 50%;
+    margin: -12px;
+    border: 2px solid var(--primary-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spinner 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Ripple Effect */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
+    transform: scale(0);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ripple:active::after {
+    transform: scale(2.5);
+    opacity: 0;
+    transition: 0s;
+}
+
+/* Shine Effect */
+.shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transform: skewX(-25deg);
+    transition: 0.8s;
+}
+
+.shine:hover::before {
+    left: 100%;
+}
+
+/* Gradient Border */
+.gradient-border {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 3px;
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask: 
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+.post-card:hover .post-image img {
+    transform: scale(1.05);
+} 
